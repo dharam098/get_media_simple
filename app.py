@@ -555,10 +555,7 @@ def show_scrape_results(title):
     df_cached = st.session_state['df_cached']
     # st.session_state['df_cached'] = df_cached
     number_of_results = len(df_cached)
-
-        
-    st.write('---')
-    
+	
     for i in range(0, number_of_results):
 
         if f'container{i}' not in st.session_state:
