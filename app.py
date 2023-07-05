@@ -546,10 +546,11 @@ def set_text_style(text, background_color, text_color):
 
 
 def show_scrape_results(title):
-	if st.session_state['selected_site'] == 'ThePirateBay':
+    if st.session_state['selected_site'] == 'ThePirateBay':
         search_tpb(title)
     elif st.session_state['selected_site'] == '1337x':
         search_1337x(title)
+
     filter_cached()
     df_cached = st.session_state['df_cached']
     # st.session_state['df_cached'] = df_cached
