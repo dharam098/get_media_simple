@@ -626,7 +626,7 @@ if 'selected_site' not in st.session_state:
     st.session_state['selected_site'] = 'ThePirateBay'
 
 
-searchbox, selectbox  = st.columns((5,1))
+searchbox, selectbox  = st.columns((4,1))
 with selectbox:
 	st.session_state['selected_site'] = st.selectbox('Select Site', ['ThePirateBay', '1337x'])
 with searchbox:
