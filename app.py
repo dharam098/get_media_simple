@@ -8,8 +8,7 @@ import time
 import re
 import base64
 
-
-# from py1337x import py1337x
+from py1337x import py1337x
 # import pyratebay
 # torrents = py1337x(proxy='1337x.to', cache='py1337xCache', cacheTime=500)
 # import libtorrent as lt
