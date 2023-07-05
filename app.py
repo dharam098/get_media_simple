@@ -307,7 +307,7 @@ def size(n):
 
 def search_tpb(query):
     global df_torrents
-    torrents = tpb.search(query, ['video'])
+    torrents = tpb.search(query)
     list_search_results=[]
     for torrent in torrents:
         list_search_results.append({'name':torrent.name, 'seeders': torrent.seeders, 'leechers': torrent.leechers, 'size':torrent.size, 'time': torrent.added, 'num_files': torrent.num_files, 'infoHash': torrent.info_hash, 'magnet': torrent.magnet()})
