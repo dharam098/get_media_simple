@@ -546,8 +546,10 @@ def set_text_style(text, background_color, text_color):
 
 
 def show_scrape_results(title):
-    # search_tpb(title)
-    search_1337x(title)
+	if st.session_state['selected_site'] == 'ThePirateBay':
+        search_tpb(title)
+    elif st.session_state['selected_site'] == '1337x':
+        search_1337x(title)
     filter_cached()
     df_cached = st.session_state['df_cached']
     # st.session_state['df_cached'] = df_cached
@@ -600,11 +602,8 @@ buttons_for_scrape_results = []
 
 st.set_page_config(page_title="My Webpage", layout="wide")
 
-if 'black_image' not in st.session_state:
-    st.session_state['black_image'] = Image.new("RGB", (width, height), color="black")
 
-if 'click_' not in st.session_state:
-    st.session_state['click_'] = False
+
 
 if 'submit_clicked' not in st.session_state:
     st.session_state['submit_clicked'] = False
@@ -612,8 +611,6 @@ if 'submit_clicked' not in st.session_state:
 if 'title' not in st.session_state:
     st.session_state['title'] = ' '
 
-if 'df_selected_tmdb_result' not in st.session_state:
-    st.session_state['df_selected_tmdb_result'] = {}
 
 if 'scrape_button_click' not in st.session_state:
     st.session_state['scrape_button_click'] = False
@@ -624,7 +621,10 @@ if 'selected_scrape_result' not in st.session_state:
 if 'df_cached' not in st.session_state:
     st.session_state['df_cached'] = pd.DataFrame()
 
+if 'selected_site' not in st.session_state:
+    st.session_state['selected_site'] = 'ThePirateBay'
 
+st.session_state['selected_site'] = st.selectbox('Select an option', ['ThePirateBay', '1337x'])
 
 query = st.text_input('Search..')
 button_clicked = st.button('Submit')
