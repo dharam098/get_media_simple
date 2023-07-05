@@ -601,7 +601,7 @@ buttons =[]
 buttons_for_scrape_results = []   
             
 
-st.set_page_config(page_title="My Webpage", layout="wide")
+st.set_page_config(page_title="Debrid Scrap", layout="wide")
 
 
 
@@ -625,7 +625,10 @@ if 'df_cached' not in st.session_state:
 if 'selected_site' not in st.session_state:
     st.session_state['selected_site'] = 'ThePirateBay'
 
-st.session_state['selected_site'] = st.selectbox('Select Site', ['ThePirateBay', '1337x'])
+
+empty, selectbox  = st.columns((7,1))
+with selectbox:
+	st.session_state['selected_site'] = st.selectbox('Select Site', ['ThePirateBay', '1337x'])
 
 query = st.text_input('Search..')
 button_clicked = st.button('Submit')
