@@ -552,29 +552,11 @@ def show_scrape_results(title):
     filter_cached()
     df_cached = st.session_state['df_cached']
     # st.session_state['df_cached'] = df_cached
-    dict = st.session_state['df_selected_tmdb_result']
     number_of_results = len(df_cached)
 
         
     st.write('---')
-    image_column, text_column  = st.columns((1,5))
-
-    with image_column:
-        st.image(Image.open(BytesIO(requests.get(dict['poster_path']).content)))
-
-    with text_column:
-        st.subheader(title)
-        st.write(dict['overview'])
-        date, button = st.columns((1,7))
-        with date:
-            st.write(dict['release_date'])
-
-
-
-
     
-
-
     for i in range(0, number_of_results):
 
         if f'container{i}' not in st.session_state:
