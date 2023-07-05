@@ -625,7 +625,7 @@ if 'df_cached' not in st.session_state:
 if 'selected_site' not in st.session_state:
     st.session_state['selected_site'] = 'ThePirateBay'
 
-st.session_state['selected_site'] = st.selectbox('Select an option', ['ThePirateBay', '1337x'])
+st.session_state['selected_site'] = st.selectbox('Select Site', ['ThePirateBay', '1337x'])
 
 query = st.text_input('Search..')
 button_clicked = st.button('Submit')
