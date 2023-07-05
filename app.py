@@ -628,7 +628,7 @@ if 'selected_site' not in st.session_state:
 
 searchbox, selectbox  = st.columns((4,1))
 with selectbox:
-	st.session_state['selected_site'] = st.selectbox('Select Site', ['ThePirateBay', '1337x'])
+	st.session_state['selected_site'] = st.selectbox('', ['ThePirateBay', '1337x'])
 with searchbox:
 	query = st.text_input('Search..')
 button_clicked = st.button('Submit')
