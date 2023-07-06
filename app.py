@@ -263,8 +263,8 @@ def size(n):
         return f"{mb}MB"
 
 
-def get_infoHash(magnet_url):   
-	pattern = r'btih:([a-zA-Z0-9]+)\W'
+def get_infoHash(magnet_url):
+    pattern = r'btih:([a-zA-Z0-9]+)\W'
     match = re.search(pattern, magnet_url)
     if match:
         info_hash = match.group(1)
