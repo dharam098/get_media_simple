@@ -13,7 +13,7 @@ from py1337x import py1337x
 torrents = py1337x(proxy='1337x.to', cache='py1337xCache', cacheTime=500)
 import libtorrent as lt
 from requests.adapters import HTTPAdapter, Retry
-# from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup
 
 ############TPB########################
 
@@ -262,7 +262,22 @@ def size(n):
         return f"{gb}GB"
     else:
         return f"{mb}MB"
+
+
+def get_infoHash(magnet_url):    
+	pattern = r'btih:([a-zA-Z0-9]+)\W'
+    match = re.search(pattern, magnet_url)
+    if match:
+        info_hash = match.group(1)
+    else:
+        info_hash = None
+        
+    if len(info_hash) == 32:
+        info_hash = base64.b16encode(base64.b32decode(info_hash))
+        info_hash = info_hash
+
     
+    return info_hash.lower()
 
 #https://technoxyz.com/tamilrockers-proxy/
 #https://www.1tamilmv.cafe/
@@ -339,7 +354,7 @@ def search_anime_tosho(title):
     for results_link in results_links:
         title = results_link.find("div", class_="link").text
         magnet_url = results_link.find("a", href=True, string='Magnet')['href']
-        info_hash = str(lt.parse_magnet_uri(magnet_url).info_hash)
+        info_hash = get_infoHash(magnet_url)
         size = results_link.find("div", class_="size").text
         date = results_link.find("div", class_="date")['title'][20:]
         try:
