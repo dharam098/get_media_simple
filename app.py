@@ -363,6 +363,7 @@ def search_anime_tosho(title):
 
     df=pd.DataFrame(l)
     df.columns = ['name', 'size', 'time', 'number_of_files', 'magnet', 'infoHash']
+    df.dropna(subset='infoHash')
 
     #refine source df
     df=(
