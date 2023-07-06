@@ -268,13 +268,11 @@ def get_infoHash(magnet_url):
     if match:
         info_hash = match.group(1)
     else:
-        info_hash = None
+        return None
         
     if len(info_hash) == 32:
         info_hash = base64.b16encode(base64.b32decode(info_hash))
-        info_hash = info_hash
-
-    
+	    
     return info_hash.lower()
 
 #https://technoxyz.com/tamilrockers-proxy/
