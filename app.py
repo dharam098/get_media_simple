@@ -563,7 +563,9 @@ def show_scrape_results(title):
         search_tpb(title)
     elif st.session_state['selected_site'] == '1337x':
         search_1337x(title)
-
+    else:
+        search_anime_tosho(title)
+        
     filter_cached()
     df_cached = st.session_state['df_cached']
     # st.session_state['df_cached'] = df_cached
@@ -638,7 +640,7 @@ if 'selected_site' not in st.session_state:
 
 searchbox, selectbox  = st.columns((4,1))
 with selectbox:
-	st.session_state['selected_site'] = st.selectbox('', ['ThePirateBay', '1337x'])
+	st.session_state['selected_site'] = st.selectbox('', ['ThePirateBay', '1337x', 'AnimeTosho'])
 with searchbox:
 	query = st.text_input('Search..')
 button_clicked = st.button('Submit')
