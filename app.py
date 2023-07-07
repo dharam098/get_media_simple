@@ -304,10 +304,16 @@ def search_1337x(query, type_ ='All'):
             except:
                 pass
         df = df[df['infoHash'] != 'NA']
+        if not len(df):
+            return df_torrents
+	    
 
     except:
         st.write('info hash not added')
+        if not len(df):
+            return df_torrents
         return df[['name', 'seeders', 'leechers', 'size', 'time', 'uploader']]
+
     df_torrents = df[['name', 'seeders', 'leechers', 'size', 'time', 'uploader', 'infoHash', 'magnet']]
 
     return df_torrents[['name', 'seeders', 'leechers', 'size', 'time', 'uploader']]
@@ -564,39 +570,41 @@ def show_scrape_results(title):
         search_1337x(title)
     else:
         search_anime_tosho(title)
-        
-    filter_cached()
-    df_cached = st.session_state['df_cached']
-    # st.session_state['df_cached'] = df_cached
-    number_of_results = len(df_cached)
-	
-    for i in range(0, number_of_results):
-
-        if f'container{i}' not in st.session_state:
-            st.session_state[f'container{i}'] = None
-        
-        if f'container{i}_is_expanded' not in st.session_state:
-            st.session_state[f'container{i}_is_expanded'] = False
-
-        title_ = f"{df_cached.iloc[i].loc['name']} [{df_cached.iloc[i].loc['size']}]"
-        st.session_state[f'container{i}'] = st.expander(title_, expanded=st.session_state[f'container{i}_is_expanded'])
-        with st.session_state[f'container{i}']:
-            if f"container{i}button" not in st.session_state:
-                st.session_state[f"container{i}button"] = False
-            st.session_state[f"container{i}button"] = st.button("link", key = f"container{i}button_")
-            if st.session_state[f"container{i}button_"]:   
-                get_debrid_link(i)
-                debrid_result = unrestrict()
-                link, streamable  = st.columns((3,2))
-                with link:
-                    for file in debrid_result:
-                        name1 = file[0]
-                        link = file[1]
-                        link = f"[{name1}]({link})"
-                        st.markdown(link, unsafe_allow_html=True)
-                with streamable:
-                    st.markdown(download_link(vlc_playlist(title), f'{title}.m3u'), unsafe_allow_html=True)
-            # st.session_state[f'container{i}_is_expanded'] = False
+    if not len(df_torrents):
+        st.write('No Results')
+    else:    
+        filter_cached()
+        df_cached = st.session_state['df_cached']
+        # st.session_state['df_cached'] = df_cached
+        number_of_results = len(df_cached)
+    	
+        for i in range(0, number_of_results):
+    
+            if f'container{i}' not in st.session_state:
+                st.session_state[f'container{i}'] = None
+            
+            if f'container{i}_is_expanded' not in st.session_state:
+                st.session_state[f'container{i}_is_expanded'] = False
+    
+            title_ = f"{df_cached.iloc[i].loc['name']} [{df_cached.iloc[i].loc['size']}]"
+            st.session_state[f'container{i}'] = st.expander(title_, expanded=st.session_state[f'container{i}_is_expanded'])
+            with st.session_state[f'container{i}']:
+                if f"container{i}button" not in st.session_state:
+                    st.session_state[f"container{i}button"] = False
+                st.session_state[f"container{i}button"] = st.button("link", key = f"container{i}button_")
+                if st.session_state[f"container{i}button_"]:   
+                    get_debrid_link(i)
+                    debrid_result = unrestrict()
+                    link, streamable  = st.columns((3,2))
+                    with link:
+                        for file in debrid_result:
+                            name1 = file[0]
+                            link = file[1]
+                            link = f"[{name1}]({link})"
+                            st.markdown(link, unsafe_allow_html=True)
+                    with streamable:
+                        st.markdown(download_link(vlc_playlist(title), f'{title}.m3u'), unsafe_allow_html=True)
+                # st.session_state[f'container{i}_is_expanded'] = False
 
     
 
