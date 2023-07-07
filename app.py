@@ -570,7 +570,7 @@ def show_scrape_results(title):
         search_1337x(title)
     else:
         search_anime_tosho(title)
-    if not len(df_torrents):
+    if len(df_torrents)==0:
         st.write('No Results')
     else:    
         filter_cached()
