@@ -711,7 +711,6 @@ with searchbox:
 # if button_clicked:
 #     st.session_state['submit_clicked'] = True
 query = st.session_state['query']
-st.write(query)
 if st.session_state['query'] != '':
     st.session_state['click_'] = False
     show_scrape_results(st.session_state['query'])
