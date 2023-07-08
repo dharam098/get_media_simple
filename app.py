@@ -696,21 +696,23 @@ if 'df_cached' not in st.session_state:
 if 'selected_site' not in st.session_state:
     st.session_state['selected_site'] = 'ThePirateBay'
 
+if 'query' not in st.session_state:
+    st.session_state['query'] = ''
 
-searchbox, selectbox  = st.columns((4,1))
+searchbox, selectbox  = st.columns((3,1))
 with selectbox:
 	st.session_state['selected_site'] = st.selectbox('', ['ThePirateBay', '1337x', 'AnimeTosho'])
 with searchbox:
-	query = st_searchbox(search_imdb,key="search..", )
-button_clicked = st.button('Submit')
+	st.session_state['query'] = st_searchbox(search_imdb,key="search..", )
+# button_clicked = st.button('Submit')
 
 
-if button_clicked:
-    st.session_state['submit_clicked'] = True
-
-if st.session_state['submit_clicked']:
+# if button_clicked:
+#     st.session_state['submit_clicked'] = True
+query = st.session_state['query']
+if st.session_state['query'] != '':
     st.session_state['click_'] = False
-    show_scrape_results(query)
+    show_scrape_results(st.session_state['query'])
     
     
 
