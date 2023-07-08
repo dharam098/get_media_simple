@@ -48,7 +48,7 @@ def suggest_movie_names(string):
     close_matches = difflib.get_close_matches(string, [movie['title'] for movie in movie_info], n=5, cutoff=0.5)
     
     # Retrieve the corresponding year of release/first aired for each close match
-    suggested_names = []
+    suggested_names = [string]
     
     for match in close_matches:
         for movie in movie_info:
@@ -56,8 +56,7 @@ def suggest_movie_names(string):
                 suggested_names.append(remove_special_characters(f"{match} {movie['year']}"))
                 suggested_names.append(remove_special_characters(match))
                 break
-                
-    suggested_names.append(string)
+        
     return suggested_names
 
 
