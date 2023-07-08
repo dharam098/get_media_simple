@@ -60,6 +60,7 @@ def suggest_movie_names(string):
     suggested_names.append(string)
     return suggested_names
 
+
 # function with list of labels
 def search_imdb(searchterm: str) -> list[any]:
     return suggest_movie_names(searchterm) if searchterm else []
