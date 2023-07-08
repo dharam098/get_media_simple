@@ -713,8 +713,8 @@ option3 = st.checkbox("AnimeTosho")
 searchbox, selectbox  = st.columns((3,1))
 with selectbox:
 	st.session_state['selected_site'] = st.selectbox('', ['ThePirateBay', '1337x', 'AnimeTosho'])
-with searchbox:
-    st.session_state['query'] = st_searchbox(search_imdb,key="search..", )
+#with searchbox:
+st.session_state['query'] = st_searchbox(search_imdb,key="search..", )
 	
 # button_clicked = st.button('Submit')
 
