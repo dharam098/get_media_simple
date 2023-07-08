@@ -344,7 +344,7 @@ def search_anime_tosho(title):
     global df_torrents
     title = title.replace(" ","+")
     url = f"https://animetosho.org/search?q={title}"
-	try:
+    try:
         page = s.get(url)
     except:
         return df_torrents
