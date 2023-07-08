@@ -49,12 +49,13 @@ def suggest_movie_names(string):
     
     # Retrieve the corresponding year of release/first aired for each close match
     suggested_names = []
+    
     for match in close_matches:
         for movie in movie_info:
             if match == movie['title']:
                 suggested_names.append(remove_special_characters(f"{match} {movie['year']}"))
                 break
-    
+    suggested_names.apped(string)
     return suggested_names
 
 # function with list of labels
