@@ -703,12 +703,6 @@ if 'query' not in st.session_state:
 
 import streamlit as st
 
-# Create checkboxes
-option1 = st.checkbox("ThePirateBay")
-option2 = st.checkbox("1337x")
-option3 = st.checkbox("AnimeTosho")
-
-
 
 searchbox, selectbox  = st.columns((3,1))
 with selectbox:
