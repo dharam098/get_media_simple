@@ -708,21 +708,13 @@ option1 = st.checkbox("ThePirateBay")
 option2 = st.checkbox("1337x")
 option3 = st.checkbox("AnimeTosho")
 
-# Display selected checkboxes
-if option1:
-    st.session_state['selected_site'] = 'ThePirateBay'
 
-if option2:
-    st.session_state['selected_site'] = '1337x'
 
-if option3:
-    st.session_state['selected_site'] = 'AnimeTosho'
-
-#searchbox, selectbox  = st.columns((3,1))
-#with selectbox:
-	#st.session_state['selected_site'] = st.selectbox('', ['ThePirateBay', '1337x', 'AnimeTosho'])
-#with searchbox:
-st.session_state['query'] = st_searchbox(search_imdb,key="search..", )
+searchbox, selectbox  = st.columns((3,1))
+with selectbox:
+	st.session_state['selected_site'] = st.selectbox('', ['ThePirateBay', '1337x', 'AnimeTosho'])
+with searchbox:
+    st.session_state['query'] = st_searchbox(search_imdb,key="search..", )
 	
 # button_clicked = st.button('Submit')
 
