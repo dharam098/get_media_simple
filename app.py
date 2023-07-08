@@ -626,7 +626,7 @@ def show_scrape_results(title):
         st.write('No Results')
     else:    
         filter_cached()
-        df_cached = st.session_state['df_cached']
+        df_cached = st.session_state.get('df_cached', pd.DataFrame())
         # st.session_state['df_cached'] = df_cached
         number_of_results = len(df_cached)
     	
