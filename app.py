@@ -13,6 +13,55 @@ torrents = py1337x(proxy='1337x.to', cache='py1337xCache', cacheTime=500)
 from requests.adapters import HTTPAdapter, Retry
 from bs4 import BeautifulSoup
 
+import difflib
+from imdb import IMDb
+from streamlit_searchbox import st_searchbox
+
+
+################### suggestions ###########
+
+def remove_special_characters(string):
+    # Remove special characters (excluding spaces) and retain alphanumeric characters
+    cleaned_string = re.sub(r'[^a-zA-Z0-9 ]', '', string)
+    return cleaned_string
+
+
+def get_release_year(movie):
+    # Extracts the release year from the movie details
+    if 'year' in movie:
+        return movie['year']
+    elif 'original air date' in movie:
+        return movie['original air date'].split('-')[0]
+    else:
+        return ''
+
+def suggest_movie_names(string):
+    ia = IMDb()
+
+    # Search for movie/TV show names using the given string
+    results = ia.search_movie(string)
+    
+    # Get a list of dictionaries containing movie/TV show names and years of release/first aired
+    movie_info = [{'title': result['title'], 'year': get_release_year(result)} for result in results]
+    
+    # Find close matches between the input string and the movie/TV show names
+    close_matches = difflib.get_close_matches(string, [movie['title'] for movie in movie_info], n=5, cutoff=0.5)
+    
+    # Retrieve the corresponding year of release/first aired for each close match
+    suggested_names = []
+    for match in close_matches:
+        for movie in movie_info:
+            if match == movie['title']:
+                suggested_names.append(remove_special_characters(f"{match} {movie['year']}"))
+                break
+    
+    return suggested_names
+
+# function with list of labels
+def search_imdb(searchterm: str) -> list[any]:
+    return suggest_movie_names(searchterm) if searchterm else []
+
+
 ############TPB########################
 
 categories = {
