@@ -721,10 +721,10 @@ st.session_state['query'] = st_searchbox(search_imdb,key="search..", )
 
 # if button_clicked:
 #     st.session_state['submit_clicked'] = True
-query = st.session_state['query']
-if st.session_state['query'] != '':
+query = st.session_state.get('query', '')
+if query != '':
     st.session_state['click_'] = False
-    show_scrape_results(st.session_state['query'])
+    show_scrape_results(query)
     
     
 
