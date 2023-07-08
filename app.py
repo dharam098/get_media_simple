@@ -344,7 +344,10 @@ def search_anime_tosho(title):
     global df_torrents
     title = title.replace(" ","+")
     url = f"https://animetosho.org/search?q={title}"
-    page = s.get(url)
+	try:
+        page = s.get(url)
+    except:
+        return df_torrents
 
     #filter sources
     soup = BeautifulSoup(page.content, "html.parser")
