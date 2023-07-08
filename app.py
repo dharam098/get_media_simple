@@ -55,7 +55,7 @@ def suggest_movie_names(string):
             if match == movie['title']:
                 suggested_names.append(remove_special_characters(f"{match} {movie['year']}"))
                 suggested_names.append(remove_special_characters(match)
-                break
+				       break
                 
     suggested_names.append(string)
     return suggested_names
