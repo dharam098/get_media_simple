@@ -1,4 +1,4 @@
-import pandas as pd
+y import pandas as pd
 import requests
 from PIL import Image
 from io import BytesIO
@@ -723,13 +723,12 @@ with searchbox:
 
 # if button_clicked:
 #     st.session_state['submit_clicked'] = True
-
-if st.session_state.get('query', ' ') == ' ':
+query_global = st.session_state.get('query', '')
+if query_global is None:
     time.sleep(1)
 else:
     st.session_state['click_'] = False
-    st.write(st.session_state['query'])
-    show_scrape_results(st.session_state.get('query', ' '))
+    show_scrape_results(query_global)
     
     
 
