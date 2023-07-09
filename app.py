@@ -56,7 +56,8 @@ def suggest_movie_names(string):
                 suggested_names.append(remove_special_characters(f"{match} {movie['year']}"))
                 suggested_names.append(remove_special_characters(match))
                 break
-        
+                
+    suggested_names = list(dict.fromkeys(suggested_names))
     return suggested_names
 
 
