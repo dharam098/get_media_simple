@@ -364,7 +364,7 @@ def search_1337x(query, type_ ='All'):
 
     except:
         st.write('info hash not added')
-        if not len(df):
+        if len(df) == 0:
             return df_torrents
         return df[['name', 'seeders', 'leechers', 'size', 'time', 'uploader']]
 
@@ -423,7 +423,7 @@ def search_anime_tosho(title):
         l.append((title, size, date, num_files, magnet_url, info_hash))
 
     df=pd.DataFrame(l)
-    if not len(df_torrents):
+    if not len(df):
         return pd.DataFrame()
     df.columns = ['name', 'size', 'time', 'number_of_files', 'magnet', 'infoHash']
     df.dropna(subset='infoHash')
