@@ -1,4 +1,4 @@
-y import pandas as pd
+import pandas as pd
 import requests
 from PIL import Image
 from io import BytesIO
