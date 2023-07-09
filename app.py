@@ -630,7 +630,7 @@ def show_scrape_results(title):
     else:
         search_anime_tosho(title)
     if len(df_torrents)==0:
-        st.write('No Results')
+        st.write('No Results!')
     else:    
         filter_cached()
         df_cached = st.session_state.get('df_cached', pd.DataFrame())
