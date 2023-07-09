@@ -728,6 +728,7 @@ if st.session_state.get('query', ' ') == ' ':
     time.sleep(1)
 else:
     st.session_state['click_'] = False
+	st.write(st.session_state['query'])
     show_scrape_results(st.session_state.get('query', ' '))
     
     
