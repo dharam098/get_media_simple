@@ -646,9 +646,9 @@ def show_scrape_results(title):
                 st.session_state[f'container{i}_is_expanded'] = False
     
             title_ = f"{df_cached.iloc[i].loc['name']} [{df_cached.iloc[i].loc['size']}]"
-            empty_, st.session_state[f'container{i}_'] = st.columns((1,4))
-            with st.session_state[f'container{i}_']:
-                st.session_state[f'container{i}'] = st.expander(title_, expanded=st.session_state[f'container{i}_is_expanded'])
+            #empty_, st.session_state[f'container{i}_'] = st.columns((1,4))
+            #with st.session_state[f'container{i}_']:
+            st.session_state[f'container{i}'] = st.expander(title_, expanded=st.session_state[f'container{i}_is_expanded'])
             with st.session_state[f'container{i}']:
                 if f"container{i}button" not in st.session_state:
                     st.session_state[f"container{i}button"] = False
@@ -712,11 +712,11 @@ if 'query' not in st.session_state:
 import streamlit as st
 
 
-selectbox, searchbox   = st.columns((1,5))
+#selectbox, searchbox   = st.columns((1,5))
 #with selectbox:
 st.session_state['selected_site'] = st.sidebar.selectbox('', ['ThePirateBay', '1337x', 'AnimeTosho'])
-with searchbox:
-	st.session_state['query'] = st_searchbox(search_imdb,key="search..", )
+#with searchbox:
+st.session_state['query'] = st_searchbox(search_imdb,key="search..", )
 	
 # button_clicked = st.button('Submit')
 
