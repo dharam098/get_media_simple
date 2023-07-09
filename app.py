@@ -341,6 +341,7 @@ def search_1337x(query, type_ ='All'):
 
         df = pd.DataFrame(results_dic['items'])
     except:
+	    st.write(query)
         st.write('site not accessible')
         return None
 
