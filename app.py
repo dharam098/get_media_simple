@@ -341,8 +341,8 @@ def search_1337x(query, type_ ='All'):
 
         df = pd.DataFrame(results_dic['items'])
     except:
-	    st.write(query)
-        st.write('site not accessible')
+	st.write(query)
+        #st.write('site not accessible')
         return None
 
 
@@ -423,6 +423,8 @@ def search_anime_tosho(title):
         l.append((title, size, date, num_files, magnet_url, info_hash))
 
     df=pd.DataFrame(l)
+    if not len(df_torrents):
+        return pd.DataFrame()
     df.columns = ['name', 'size', 'time', 'number_of_files', 'magnet', 'infoHash']
     df.dropna(subset='infoHash')
 
