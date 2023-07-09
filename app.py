@@ -712,9 +712,9 @@ if 'query' not in st.session_state:
 import streamlit as st
 
 
-selectbox, searchbox   = st.columns((1,4))
-with selectbox:
-	st.session_state['selected_site'] = st.selectbox('', ['ThePirateBay', '1337x', 'AnimeTosho'])
+selectbox, searchbox   = st.columns((1,5))
+#with selectbox:
+st.session_state['selected_site'] = st.sidebar.selectbox('', ['ThePirateBay', '1337x', 'AnimeTosho'])
 with searchbox:
 	st.session_state['query'] = st_searchbox(search_imdb,key="search..", )
 	
