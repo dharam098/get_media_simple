@@ -643,7 +643,7 @@ def show_scrape_results(title):
                 st.session_state[f'container{i}_is_expanded'] = False
     
             title_ = f"{df_cached.iloc[i].loc['name']} [{df_cached.iloc[i].loc['size']}]"
-            empty_, st.session_state[f'container{i}_'] = st.columns((1,3))
+            empty_, st.session_state[f'container{i}_'] = st.columns((1,4))
             with st.session_state[f'container{i}_']:
                 st.session_state[f'container{i}'] = st.expander(title_, expanded=st.session_state[f'container{i}_is_expanded'])
             with st.session_state[f'container{i}']:
@@ -709,7 +709,7 @@ if 'query' not in st.session_state:
 import streamlit as st
 
 
-selectbox, searchbox   = st.columns((1,3))
+selectbox, searchbox   = st.columns((1,4))
 with selectbox:
 	st.session_state['selected_site'] = st.selectbox('', ['ThePirateBay', '1337x', 'AnimeTosho'])
 with searchbox:
