@@ -19,6 +19,8 @@ from streamlit_searchbox import st_searchbox
 
 
 ################### suggestions ###########
+tmdb_api_key = 'bbaa8919f1f6d5274a6835d71e37d20b'
+
 
 def remove_special_characters(string):
     # Remove special characters (excluding spaces) and retain alphanumeric characters
@@ -26,38 +28,29 @@ def remove_special_characters(string):
     return cleaned_string
 
 
-def get_release_year(movie):
-    # Extracts the release year from the movie details
-    if 'year' in movie:
-        return movie['year']
-    elif 'original air date' in movie:
-        return movie['original air date'].split('-')[0]
-    else:
-        return ''
-
 def suggest_movie_names(string):
-    ia = IMDb()
-
-    # Search for movie/TV show names using the given string
-    results = ia.search_movie(string)
+      # Replace with your TMDB API key
     
-    # Get a list of dictionaries containing movie/TV show names and years of release/first aired
-    movie_info = [{'title': result['title'], 'year': get_release_year(result)} for result in results]
+    # Make a GET request to the TMDB API to search for movies
+    url = f"https://api.themoviedb.org/3/search/movie?api_key={tmdb_api_key}&query={string}"
+    response = requests.get(url)
+    data = response.json()
     
-    # Find close matches between the input string and the movie/TV show names
+    # Get a list of dictionaries containing movie names and years
+    movie_info = [{'title': movie['title'], 'year': movie['release_date'].split('-')[0]} for movie in data['results']]
+    
+    # Find close matches between the input string and the movie names
     close_matches = difflib.get_close_matches(string, [movie['title'] for movie in movie_info], n=5, cutoff=0.5)
     
-    # Retrieve the corresponding year of release/first aired for each close match
+    # Retrieve the corresponding year for each close match
     suggested_names = [string]
-    
     for match in close_matches:
         for movie in movie_info:
             if match == movie['title']:
                 suggested_names.append(remove_special_characters(f"{match} {movie['year']}"))
                 suggested_names.append(remove_special_characters(match))
                 break
-                
-    suggested_names = list(dict.fromkeys(suggested_names))
+    
     return suggested_names
 
 
