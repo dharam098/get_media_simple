@@ -27,9 +27,8 @@ def remove_special_characters(string):
     cleaned_string = re.sub(r'[^a-zA-Z0-9 ]', '', string)
     return cleaned_string
 
-
 def suggest_movie_names(string):
-      # Replace with your TMDB API key
+    tmdb_api_key = 'bbaa8919f1f6d5274a6835d71e37d20b'  # Replace with your TMDB API key
     
     # Make a GET request to the TMDB API to search for movies
     url = f"https://api.themoviedb.org/3/search/movie?api_key={tmdb_api_key}&query={string}"
@@ -37,18 +36,20 @@ def suggest_movie_names(string):
     data = response.json()
     
     # Get a list of dictionaries containing movie names and years
-    movie_info = [{'title': movie['title'], 'year': movie['release_date'].split('-')[0]} for movie in data['results']]
+    
+    movie_info = [{'title': movie['title'], 'original_title': movie['original_title'], 'year': movie['release_date'].split('-')[0]} for movie in data['results']]
     
     # Find close matches between the input string and the movie names
-    close_matches = difflib.get_close_matches(string, [movie['title'] for movie in movie_info], n=5, cutoff=0.5)
+    suggest_names = [movie['title'] for movie in movie_info]
+    # close_matches = difflib.get_close_matches(string, [movie['title'] for movie in movie_info], n=5, cutoff=0.5)
     
     # Retrieve the corresponding year for each close match
     suggested_names = [string]
-    for match in close_matches:
+    for match in suggest_names:
         for movie in movie_info:
             if match == movie['title']:
-                suggested_names.append(remove_special_characters(f"{match} {movie['year']}"))
-                suggested_names.append(remove_special_characters(match))
+                suggested_names.append(f"{match} {movie['year']}")
+                suggested_names.append(match)
                 break
     
     return suggested_names
