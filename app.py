@@ -623,9 +623,9 @@ def set_text_style(text, background_color, text_color):
 
 
 def show_scrape_results(title):
-    if st.session_state.get('selected_site', 'ThePirateBay') == 'ThePirateBay':
+    if st.session_state.get('selected_site', '1337x') == 'ThePirateBay':
         search_tpb(title)
-    elif st.session_state.get('selected_site', 'ThePirateBay') == '1337x':
+    elif st.session_state.get('selected_site', '1337x') == '1337x':
         search_1337x(title)
     else:
         search_anime_tosho(title)
@@ -703,7 +703,7 @@ if 'df_cached' not in st.session_state:
     st.session_state['df_cached'] = pd.DataFrame()
 
 if 'selected_site' not in st.session_state:
-    st.session_state['selected_site'] = 'ThePirateBay'
+    st.session_state['selected_site'] = '1337x'
 
 if 'query' not in st.session_state:
     st.session_state['query'] = ''
@@ -714,7 +714,7 @@ import streamlit as st
 
 #selectbox, searchbox   = st.columns((1,5))
 #with selectbox:
-st.session_state['selected_site'] = st.sidebar.selectbox('', ['ThePirateBay', '1337x', 'AnimeTosho'])
+st.session_state['selected_site'] = st.sidebar.selectbox('', ['1337x', 'ThePirateBay',  'AnimeTosho'])
 #with searchbox:
 st.session_state['query'] = st_searchbox(search_imdb,key="search..", )
 	
