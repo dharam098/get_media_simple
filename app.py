@@ -708,14 +708,14 @@ import streamlit as st
 #with selectbox:
 st.session_state['selected_site'] = st.sidebar.selectbox('', ['1337x', 'ThePirateBay',  'AnimeTosho'])
 #with searchbox:
-st.session_state['query'] = remove_special_characters(st_searchbox(search_imdb,key="search..", ))
+st.session_state['query'] = st_searchbox(search_imdb,key="search..", )
 	
 # button_clicked = st.button('Submit')
 
 
 # if button_clicked:
 #     st.session_state['submit_clicked'] = True
-query_global = st.session_state.get('query', '')
+query_global = remove_special_characters(st.session_state.get('query', ''))
 if query_global is None:
     time.sleep(1)
 else:
