@@ -38,8 +38,8 @@ def suggest_movie_names(string):
     tv_data = tv_response.json()
     
     # Get a list of dictionaries containing movie/TV show titles and release years
-    movie_info = [{'title': ':clapper: ' + movie['title'] , 'year': movie['release_date'].split('-')[0]} for movie in movie_data['results']]
-    tv_info = [{'title': ':tv: ' + show['name'] , 'year': show['first_air_date'].split('-')[0]} for show in tv_data['results']]
+    movie_info = [{'title': movie['title'] , 'year': movie['release_date'].split('-')[0]} for movie in movie_data['results']]
+    tv_info = [{'title': show['name'] , 'year': show['first_air_date'].split('-')[0]} for show in tv_data['results']]
     
     # Combine movie and TV show information into a single list
     all_info = movie_info + tv_info
