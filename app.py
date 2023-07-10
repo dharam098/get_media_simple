@@ -28,31 +28,29 @@ def remove_special_characters(string):
     return cleaned_string
 
 def suggest_movie_names(string):
-    tmdb_api_key = 'bbaa8919f1f6d5274a6835d71e37d20b'  # Replace with your TMDB API key
+    movie_url = f"https://api.themoviedb.org/3/search/movie?api_key={tmdb_api_key}&query={string}"
+    movie_response = requests.get(movie_url)
+    movie_data = movie_response.json()
     
-    # Make a GET request to the TMDB API to search for movies
-    url = f"https://api.themoviedb.org/3/search/movie?api_key={tmdb_api_key}&query={string}"
-    response = requests.get(url)
-    data = response.json()
+    # Make a GET request to the TMDB API to search for TV shows
+    tv_url = f"https://api.themoviedb.org/3/search/tv?api_key={api_key}&query={string}"
+    tv_response = requests.get(tv_url)
+    tv_data = tv_response.json()
     
-    # Get a list of dictionaries containing movie names and years
+    # Get a list of dictionaries containing movie/TV show titles and release years
+    movie_info = [{'title': ':clapper: ' + movie['title'] , 'year': movie['release_date'].split('-')[0]} for movie in movie_data['results']]
+    tv_info = [{'title': ':tv: ' + show['name'] , 'year': show['first_air_date'].split('-')[0]} for show in tv_data['results']]
     
-    movie_info = [{'title': movie['title'], 'original_title': movie['original_title'], 'year': movie['release_date'].split('-')[0]} for movie in data['results']]
+    # Combine movie and TV show information into a single list
+    all_info = movie_info + tv_info
     
-    # Find close matches between the input string and the movie names
-    suggest_names = [movie['title'] for movie in movie_info]
-    # close_matches = difflib.get_close_matches(string, [movie['title'] for movie in movie_info], n=5, cutoff=0.5)
+    # Find close matches between the input string and the movie/TV show titles
+    suggest_names = [string]
+    for info in all_info:
+        suggest_names.append(info['title'])
+        suggest_names.append(info['title'] + ' '+ info['year'])
     
-    # Retrieve the corresponding year for each close match
-    suggested_names = [string]
-    for match in suggest_names:
-        for movie in movie_info:
-            if match == movie['title']:
-                suggested_names.append(remove_special_characters(f"{match} {movie['year']}"))
-                suggested_names.append(remove_special_characters(match))
-                break
-    
-    return suggested_names
+    return suggest_names
 
 
 # function with list of labels
@@ -710,7 +708,7 @@ import streamlit as st
 #with selectbox:
 st.session_state['selected_site'] = st.sidebar.selectbox('', ['1337x', 'ThePirateBay',  'AnimeTosho'])
 #with searchbox:
-st.session_state['query'] = st_searchbox(search_imdb,key="search..", )
+st.session_state['query'] = remove_special_characters(st_searchbox(search_imdb,key="search..", ))
 	
 # button_clicked = st.button('Submit')
 
