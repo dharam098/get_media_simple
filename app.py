@@ -33,7 +33,7 @@ def suggest_movie_names(string):
     movie_data = movie_response.json()
     
     # Make a GET request to the TMDB API to search for TV shows
-    tv_url = f"https://api.themoviedb.org/3/search/tv?api_key={api_key}&query={string}"
+    tv_url = f"https://api.themoviedb.org/3/search/tv?api_key={tmdb_api_key}&query={string}"
     tv_response = requests.get(tv_url)
     tv_data = tv_response.json()
     
