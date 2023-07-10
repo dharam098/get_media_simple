@@ -45,12 +45,13 @@ def suggest_movie_names(string):
     all_info = movie_info + tv_info
     
     # Find close matches between the input string and the movie/TV show titles
-    suggest_names = [string]
+    suggested_names = [string]
     for info in all_info:
-        suggest_names.append(info['title'])
-        suggest_names.append(info['title'] + ' '+ info['year'])
-    
-    return suggest_names
+        suggested_names.append(info['title'])
+        suggested_names.append(info['title'] + ' '+ info['year'])
+        
+    suggested_names = list(dict.fromkeys(suggested_names))
+    return suggested_names
 
 
 # function with list of labels
