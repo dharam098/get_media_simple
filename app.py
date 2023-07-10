@@ -48,8 +48,8 @@ def suggest_movie_names(string):
     for match in suggest_names:
         for movie in movie_info:
             if match == movie['title']:
-                suggested_names.append(f"{match} {movie['year']}")
-                suggested_names.append(match)
+                suggested_names.append(remove_special_characters(f"{match} {movie['year']}"))
+                suggested_names.append(remove_special_characters(match))
                 break
     
     return suggested_names
