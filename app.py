@@ -44,14 +44,16 @@ def suggest_movie_names(string):
     # Combine movie and TV show information into a single list
     all_info = movie_info + tv_info
     results = pd.DataFrame(all_info)
-    results.sort_values(by = 'popularity', ascending =False ,inplace=True)
-    # Find close matches between the input string and the movie/TV show titles
-    suggested_names = [string]
-    for i, info in results.iterrows():
-        suggested_names.append(info['title'])
-        suggested_names.append(info['title'] + ' '+ info['year'])
-        
-    suggested_names = list(dict.fromkeys(suggested_names))
+    try:
+        results.sort_values(by = 'popularity', ascending =False ,inplace=True)
+    	results.drop_duplicates(subset = 'title', inplace=True)
+        # Find close matches between the input string and the movie/TV show titles
+        suggested_names = [string]
+        for i, info in results.iterrows():
+            suggested_names.append(info['title'])
+            suggested_names.append(info['title'] + ' '+ info['year'])
+    else:
+        return [string]
     return suggested_names
 
 
