@@ -52,7 +52,7 @@ def suggest_movie_names(string):
         for i, info in results.iterrows():
             suggested_names.append(info['title'])
             suggested_names.append(info['title'] + ' '+ info['year'])
-    else:
+    except:
         return [string]
     return suggested_names
 
