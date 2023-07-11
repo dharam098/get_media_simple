@@ -46,7 +46,7 @@ def suggest_movie_names(string):
     results = pd.DataFrame(all_info)
     try:
         results.sort_values(by = 'popularity', ascending =False ,inplace=True)
-    	results.drop_duplicates(subset = 'title', inplace=True)
+        results.drop_duplicates(subset = 'title', inplace=True)
         # Find close matches between the input string and the movie/TV show titles
         suggested_names = [string]
         for i, info in results.iterrows():
