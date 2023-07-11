@@ -38,15 +38,16 @@ def suggest_movie_names(string):
     tv_data = tv_response.json()
     
     # Get a list of dictionaries containing movie/TV show titles and release years
-    movie_info = [{'title': '🎬 '+ movie['title'] , 'year': movie['release_date'].split('-')[0]} for movie in movie_data['results']]
-    tv_info = [{'title': '📺 '+ show['name'] , 'year': show['first_air_date'].split('-')[0]} for show in tv_data['results']]
+    movie_info = [{'title': '🎬 '+ movie['title'] , 'year': movie['release_date'].split('-')[0], 'popularity': movie['popularity']} for movie in movie_data['results']]
+    tv_info = [{'title': '📺 '+ show['name'] , 'year': show['first_air_date'].split('-')[0], 'popularity': show['popularity']} for show in tv_data['results']]
     
     # Combine movie and TV show information into a single list
     all_info = movie_info + tv_info
-    
+    results = pd.DataFrame(all_info)
+    results.sort_values(by = 'popularity', inplace=True)
     # Find close matches between the input string and the movie/TV show titles
     suggested_names = [string]
-    for info in all_info:
+    for i, info in results.iterrows():
         suggested_names.append(info['title'])
         suggested_names.append(info['title'] + ' '+ info['year'])
         
