@@ -23,9 +23,11 @@ tmdb_api_key = 'bbaa8919f1f6d5274a6835d71e37d20b'
 
 
 def remove_special_characters(string):
-    st.write(string)
     # Remove special characters (excluding spaces) and retain alphanumeric characters
-    cleaned_string = re.sub(r'[^a-zA-Z0-9 ]', '', string)
+    try:
+        cleaned_string = re.sub(r'[^a-zA-Z0-9 ]', '', string)
+    except:
+        return ' '
     return cleaned_string
 
 def suggest_movie_names(string):
