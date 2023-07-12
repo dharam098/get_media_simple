@@ -443,10 +443,7 @@ def filter_cached():
     #check cached
     hash_list = '/'.join(df.loc[:,'infoHash'].to_list())
     url = f"https://api.real-debrid.com/rest/1.0/torrents/instantAvailability/{hash_list}"
-    response = requests.get(
-        url
-        ,headers={"Authorization": f"Bearer {api}"}
-    )
+    response = requests.get(url,headers={"Authorization": f"Bearer {api}"})
     df['cache_info'] = df.apply(lambda row: file_list(response.json()[row.infoHash.lower()]), axis = 1)
     df['number_of_files'] = df.apply(lambda row: len(row.cache_info), axis = 1)
     df=df[df['number_of_files']>0].reset_index(drop=True)
@@ -724,7 +721,6 @@ query_global = st.session_state.get('query', '')
 if query_global is None:
     time.sleep(1)
 else:
-    st.session_state['click_'] = False
     show_scrape_results(remove_special_characters(query_global))
     
     
