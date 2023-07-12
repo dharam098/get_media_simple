@@ -449,7 +449,7 @@ def filter_cached():
         df['number_of_files'] = df.apply(lambda row: len(row.cache_info), axis = 1)
         df=df[df['number_of_files']>0].reset_index(drop=True)
     except:
-	    st.write('error checking debrid cached')
+        st.write('error checking debrid cached')
         st.session_state['df_cached'] = df_cached
         return df_cached
         
