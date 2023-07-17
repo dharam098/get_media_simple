@@ -21,6 +21,16 @@ from streamlit_searchbox import st_searchbox
 ################### suggestions ###########
 tmdb_api_key = 'bbaa8919f1f6d5274a6835d71e37d20b'
 
+def strip_non_ascii_and_unprintable(text):
+    result = ''.join(char for char in text if char in string.printable)
+    return result.encode('ascii', errors='ignore').decode('ascii', errors='ignore')
+
+def strip_accents(s):
+    try:
+        return ''.join(c for c in unicodedata.normalize('NFD', s) if unicodedata.category(c) != 'Mn')
+    except:
+        return s
+
 
 def remove_special_characters(title, broken=None):
     title = title.lower()
