@@ -24,13 +24,37 @@ from streamlit_searchbox import st_searchbox
 ################### suggestions ###########
 tmdb_api_key = 'bbaa8919f1f6d5274a6835d71e37d20b'
 
-def remove_special_characters(string):
-    # Remove special characters (excluding spaces) and retain alphanumeric characters
+def clean_title(title, broken=None):
+    #strip accents
+    title = title.lower()
     try:
-        cleaned_string = re.sub(r'[^a-zA-Z0-9 ]', '', string)
+        title =  ''.join(c for c in unicodedata.normalize('NFD', s) if unicodedata.category(c) != 'Mn')
     except:
-        return ' '
-    return cleaned_string
+        pass
+    
+    #strip_non_ascii_and_unprintable
+    title = ''.join(char for char in title if char in string.printable)
+    title =  title.encode('ascii', errors='ignore').decode('ascii', errors='ignore')
+
+    if broken == 1:
+        apostrophe_replacement = ''
+    elif broken == 2:
+        apostrophe_replacement = ' s'
+    else:
+        apostrophe_replacement = 's'
+
+    title = title.replace("\\'s", apostrophe_replacement)
+    title = title.replace("'s", apostrophe_replacement)
+    title = title.replace("&#039;s", apostrophe_replacement)
+    title = title.replace(" 039 s", apostrophe_replacement)
+
+    title = re.sub(r'\'|\’', '', title)
+    title = re.sub(r'\:|\\|\/|\,|\!|\?|\(|\)|\"|\+|\[|\]|\-|\_|\.|\{|\}', ' ', title)
+    title = re.sub(r'\s+', ' ', title)
+    title = re.sub(r'\&', 'and', title)
+
+    return title.strip()
+
 
 def suggest_movie_names(string):
     movie_url = f"https://api.themoviedb.org/3/search/movie?api_key={tmdb_api_key}&query={string}"
