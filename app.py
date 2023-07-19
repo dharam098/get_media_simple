@@ -702,7 +702,6 @@ width = 200
 height = 300
 flag=0
 title = ''
-black_image = Image.new("RGB", (width, height), color="black")
 df_tmdb_results = pd.DataFrame()
 buttons =[]
 buttons_for_scrape_results = []   
