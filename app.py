@@ -755,10 +755,10 @@ query_global = st.session_state.get('query', '')
 if query_global is None:
     time.sleep(1)
 else:
-    show_scrape_results(remove_special_characters(query_global))
+    show_scrape_results(clean_title(query_global))
     
     
-
+clean_title
 if st.session_state.get('scrape_button_click', False):
     df_cached = st.session_state['df_cached']
     get_debrid_link(st.session_state['selected_scrape_result'])
