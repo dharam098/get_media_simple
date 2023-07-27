@@ -758,9 +758,8 @@ st.session_state['query'] = st_searchbox(search_imdb,key="search..", )
 query_global = st.session_state.get('query', '')
 if query_global is None:
     time.sleep(1)
-elif:
-    st.session_state['pin'] == '12586'
-    show_scrape_results(clean_title(query_global))
+elif st.session_state['pin'] == '12586':
+	show_scrape_results(clean_title(query_global))
 else:
     st.write('pin incorrect!')
     time.sleep(1)
