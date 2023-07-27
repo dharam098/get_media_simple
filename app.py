@@ -650,9 +650,9 @@ def set_text_style(text, background_color, text_color):
 
 
 def show_scrape_results(title):
-    if st.session_state.get('selected_site', '1337x') == 'ThePirateBay':
+    if st.session_state.get('selected_site', 'ThePirateBay') == 'ThePirateBay':
         search_tpb(title)
-    elif st.session_state.get('selected_site', '1337x') == '1337x':
+    elif st.session_state.get('selected_site', 'ThePirateBay') == '1337x':
         search_1337x(title)
     else:
         search_anime_tosho(title)
