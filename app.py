@@ -745,7 +745,7 @@ import streamlit as st
 
 #selectbox, searchbox   = st.columns((1,5))
 #with selectbox:
-st.session_state['selected_site'] = st.sidebar.selectbox('Engine', ['1337x', 'ThePirateBay',  'AnimeTosho'])
+st.session_state['selected_site'] = st.sidebar.selectbox('Engine', ['ThePirateBay', '1337x', 'AnimeTosho'])
 st.session_state['pin'] = st.sidebar.text_input("Enter your PIN", type="password")
 #with searchbox:
 st.session_state['query'] = st_searchbox(search_imdb,key="search..", )
