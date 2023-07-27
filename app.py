@@ -735,12 +735,18 @@ if 'query' not in st.session_state:
     st.session_state['query'] = ''
 
 
+if 'query' not in st.session_state:
+    st.session_state['pin'] = '0000'
+
+
+
 import streamlit as st
 
 
 #selectbox, searchbox   = st.columns((1,5))
 #with selectbox:
 st.session_state['selected_site'] = st.sidebar.selectbox('Engine', ['1337x', 'ThePirateBay',  'AnimeTosho'])
+st.session_state['pin'] = st.sidebar.text_input("Enter your PIN", type="password")
 #with searchbox:
 st.session_state['query'] = st_searchbox(search_imdb,key="search..", )
 	
@@ -752,8 +758,13 @@ st.session_state['query'] = st_searchbox(search_imdb,key="search..", )
 query_global = st.session_state.get('query', '')
 if query_global is None:
     time.sleep(1)
-else:
+elif:
+    st.session_state['pin'] == '12586'
     show_scrape_results(clean_title(query_global))
+else:
+    st.write('pin incorrect!')
+    time.sleep(1)
+    
     
     
 if st.session_state.get('scrape_button_click', False):
